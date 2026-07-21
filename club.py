@@ -1,1 +1,13 @@
+class Club:
+    def __init__(self, name, budget, reputation):
+        self.name = name
+        self.budget = budget
+        self.reputation = reputation
+        self.players = []
+        self.trophies = []
 
+    def add_player(self, player):
+        self.players.append(player)
+
+    def info(self):
+        return f"{self.name} | Budget: ${self.budget:,} | Reputation: {self.reputation}"
