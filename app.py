@@ -37,11 +37,8 @@ st.set_page_config(
 
 
 st.title("⚽ Soccer GM")
-st.write("Become the manager of a football club!")
 
-st.divider()
-
-
+# Choose club
 club_names = [club.name for club in clubs]
 
 choice = st.selectbox(
@@ -49,59 +46,107 @@ choice = st.selectbox(
     club_names
 )
 
-
 selected_club = next(
     club for club in clubs
     if club.name == choice
 )
 
 
-st.header(f"🏟️ {selected_club.name}")
+# Navigation
+page = st.sidebar.selectbox(
+    "Menu",
+    [
+        "Dashboard",
+        "Squad",
+        "Transfer Market"
+    ]
+)
 
 
-col1, col2 = st.columns(2)
+# Dashboard
+if page == "Dashboard":
 
-with col1:
-    st.metric(
-        "Transfer Budget",
-        f"${selected_club.budget:,}"
-    )
+    st.header(f"🏟️ {selected_club.name}")
 
-with col2:
-    st.metric(
-        "Reputation",
-        selected_club.reputation
-    )
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "💰 Transfer Budget",
+            f"${selected_club.budget:,}"
+        )
+
+    with col2:
+        st.metric(
+            "⭐ Reputation",
+            selected_club.reputation
+        )
 
 
-st.divider()
+# Squad
+elif page == "Squad":
 
-st.subheader("👥 Squad")
+    st.header("👥 Squad")
 
+    for squad_player in selected_club.players:
 
-for squad_player in selected_club.players:
+        player = next(
+            (p for p in players if p["name"] == squad_player),
+            None
+        )
 
-    player = next(
-        (p for p in players if p["name"] == squad_player),
-        None
-    )
-
-    if player:
-        with st.container():
+        if player:
             st.subheader(f"⚽ {player['name']}")
+            st.write(
+                f"{player['position']} | "
+                f"Rating: {player['rating']} | "
+                f"Value: ${player['value']:,}"
+            )
 
-            col1, col2, col3 = st.columns(3)
+            st.divider()
 
-            with col1:
-                st.write(f"Position: {player['position']}")
-                st.write(f"Age: {player['age']}")
 
-            with col2:
-                st.write(f"⭐ Rating: {player['rating']}")
-                st.write(f"🚀 Potential: {player['potential']}")
+# Transfer Market
+elif page == "Transfer Market":
 
-            with col3:
-                st.write(f"💰 Value: ${player['value']:,}")
-                st.write(f"💵 Wage: ${player['wage']:,}")
+    st.header("🔄 Transfer Market")
+
+    st.write(
+        f"Available Budget: ${selected_club.budget:,}"
+    )
+
+    for player in players:
+
+        if player["name"] not in selected_club.players:
+
+            st.subheader(player["name"])
+
+            st.write(
+                f"{player['position']} | "
+                f"⭐ {player['rating']} | "
+                f"💰 ${player['value']:,}"
+            )
+
+            if st.button(
+                f"Buy {player['name']}",
+                key=player["name"]
+            ):
+
+                if selected_club.budget >= player["value"]:
+
+                    selected_club.players.append(
+                        player["name"]
+                    )
+
+                    selected_club.budget -= player["value"]
+
+                    st.success(
+                        f"Signed {player['name']}!"
+                    )
+
+                else:
+                    st.error(
+                        "Not enough money!"
+                    )
 
             st.divider()
