@@ -1,1 +1,17 @@
-
+[
+  {
+    "name": "Manchester United",
+    "budget": 150000000,
+    "reputation": 90
+  },
+  {
+    "name": "Barcelona",
+    "budget": 100000000,
+    "reputation": 91
+  },
+  {
+    "name": "Real Madrid",
+    "budget": 200000000,
+    "reputation": 95
+  }
+]
