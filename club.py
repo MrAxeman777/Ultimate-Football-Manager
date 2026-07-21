@@ -1,9 +1,9 @@
 class Club:
-    def __init__(self, name, budget, reputation):
+    def __init__(self, name, budget, reputation, players=None):
         self.name = name
         self.budget = budget
         self.reputation = reputation
-        self.players = []
+        self.players = players if players else []
         self.trophies = []
 
     def add_player(self, player):
