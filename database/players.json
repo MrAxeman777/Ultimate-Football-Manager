@@ -1,1 +1,29 @@
-
+[
+  {
+    "name": "Lamine Yamal",
+    "position": "RW",
+    "age": 19,
+    "rating": 89,
+    "potential": 94,
+    "value": 150000000,
+    "wage": 300000
+  },
+  {
+    "name": "Kylian Mbappe",
+    "position": "ST",
+    "age": 27,
+    "rating": 91,
+    "potential": 92,
+    "value": 180000000,
+    "wage": 500000
+  },
+  {
+    "name": "Bruno Fernandes",
+    "position": "CAM",
+    "age": 31,
+    "rating": 87,
+    "potential": 87,
+    "value": 70000000,
+    "wage": 250000
+  }
+]
