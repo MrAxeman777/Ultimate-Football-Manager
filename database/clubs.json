@@ -2,16 +2,26 @@
   {
     "name": "Manchester United",
     "budget": 150000000,
-    "reputation": 90
+    "reputation": 90,
+    "players": [
+      "Bruno Fernandes",
+      "Lamine Yamal"
+    ]
   },
   {
     "name": "Barcelona",
     "budget": 100000000,
-    "reputation": 91
+    "reputation": 91,
+    "players": [
+      "Lamine Yamal"
+    ]
   },
   {
     "name": "Real Madrid",
     "budget": 200000000,
-    "reputation": 95
+    "reputation": 95,
+    "players": [
+      "Kylian Mbappe"
+    ]
   }
 ]
