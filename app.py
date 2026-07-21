@@ -13,7 +13,8 @@ def load_clubs():
         club = Club(
             c["name"],
             c["budget"],
-            c["reputation"]
+            c["reputation"],
+            c["players"]
         )
         clubs.append(club)
 
@@ -32,23 +33,17 @@ st.write("Become the manager of a football club!")
 
 st.divider()
 
-st.subheader("Choose your club")
-
 club_names = [club.name for club in clubs]
 
 choice = st.selectbox(
-    "Select your club:",
+    "Choose your club:",
     club_names
 )
 
-selected_club = None
-
-for club in clubs:
-    if club.name == choice:
-        selected_club = club
-
-
-st.divider()
+selected_club = next(
+    club for club in clubs
+    if club.name == choice
+)
 
 st.header(f"🏟️ {selected_club.name}")
 
@@ -66,7 +61,12 @@ with col2:
         selected_club.reputation
     )
 
+st.divider()
 
-st.success(
-    f"You are now managing {selected_club.name}!"
-)
+st.subheader("👥 Squad")
+
+if selected_club.players:
+    for player in selected_club.players:
+        st.write(f"⚽ {player}")
+else:
+    st.write("No players yet.")
